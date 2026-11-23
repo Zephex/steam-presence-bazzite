@@ -1,0 +1,24 @@
+[Unit]
+Description=Send Steam and Spotify presence to the Personal Bio page
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/steam-presence-bridge
+Restart=on-failure
+RestartSec=10
+
+# Hardening: the bridge only reads local files and needs network + D-Bus.
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ProtectHome=read-only
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictSUIDSGID=yes
+LockPersonality=yes
+
+[Install]
+WantedBy=default.target

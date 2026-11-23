@@ -1,0 +1,12 @@
+[Unit]
+Description=Send Steam and Spotify presence to the Personal Bio page
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/steam-presence-bridge
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target
